@@ -44,12 +44,12 @@
     <!-- Samsung Camcorder Mode -->
     <bool name="needsSamsungCamMode">false</bool>
     <!-- HTC Camcorder Mode -->
-    <bool name="needsHTCCamMode">true</bool>
+    <bool name="needsHTCCamMode">false</bool>
     <!-- Always use recording dimensions for preview -->
     <bool name="useVideoSizeForPreview">false</bool>
     <!-- Stay in continuous focus even if touch-to-focus is used
          This option doesn't make sense if wantsFocusModes is on -->
-    <bool name="useContinuosFocusForTouch">true</bool>
+    <bool name="useContinuosFocusForTouch">false</bool>
     <!-- Disable touch snapshot in video recording -->
     <bool name="disableTouchSnapshot">true</bool>
 </resources>
