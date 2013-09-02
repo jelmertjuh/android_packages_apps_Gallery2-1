@@ -446,21 +446,15 @@ public class VideoModule implements CameraModule,
     // Preview area is touched. Take a picture.
     @Override
     public void onSingleTapUp(View view, int x, int y) {
-      if (!Util.disableTouchSnapshot()) {
         if (mMediaRecorderRecording && effectsActive()) {
             new RotateTextToast(mActivity, R.string.disable_video_snapshot_hint,
                     mOrientation).show();
             return;
         }
 
+      if (!Util.disableTouchSnapshot()) {
         MediaSaveService s = mActivity.getMediaSaveService();
         if (mPaused || mSnapshotInProgress || effectsActive() || s == null || s.isQueueFull()) {
-            return;
-        }
-
-        if (!mMediaRecorderRecording) {
-            // check for dismissing popup
-            mUI.dismissPopup(true);
             return;
         }
 
@@ -478,6 +472,11 @@ public class VideoModule implements CameraModule,
         UsageStatistics.onEvent(UsageStatistics.COMPONENT_CAMERA,
                 UsageStatistics.ACTION_CAPTURE_DONE, "VideoSnapshot");
       }
+        if (!mMediaRecorderRecording) {
+            // check for dismissing popup
+            mUI.dismissPopup(true);
+            return;
+        }
     }
 
     @Override
