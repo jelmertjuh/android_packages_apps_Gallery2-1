@@ -457,7 +457,15 @@ public class VideoModule implements CameraModule,
         if (mPaused || mSnapshotInProgress || effectsActive() || s == null || s.isQueueFull()) {
             return;
         }
+      }
 
+        if (!mMediaRecorderRecording) {
+            // check for dismissing popup
+            mUI.dismissPopup(true);
+            return;
+        }
+
+      if (!Util.disableTouchSnapshot()) {
         // Set rotation and gps data.
         int rotation = Util.getJpegRotation(mCameraId, mOrientation);
         mParameters.setRotation(rotation);
@@ -472,11 +480,7 @@ public class VideoModule implements CameraModule,
         UsageStatistics.onEvent(UsageStatistics.COMPONENT_CAMERA,
                 UsageStatistics.ACTION_CAPTURE_DONE, "VideoSnapshot");
       }
-        if (!mMediaRecorderRecording) {
-            // check for dismissing popup
-            mUI.dismissPopup(true);
-            return;
-        }
+
     }
 
     @Override
